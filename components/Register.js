@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, TextInput } from 'react-native';
+url = "http://2f5caa14.ngrok.io"
 
 class Register extends React.Component {
   static navigationOptions = {
@@ -16,7 +17,7 @@ class Register extends React.Component {
 
   register() {
     console.log(this.state.username);
-    fetch('http://4f6f3283.ngrok.io/register', {
+    fetch(url + '/register', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -34,13 +35,12 @@ class Register extends React.Component {
 
       /* do something with responseJson and go back to the Login view but
       * make sure to check for responseJson.success! */
-     this.props.navigation.navigate('Login')
+     this.props.navigation.navigate('Login');
     })
     .catch((err) => {
       console.log('error', err)
     });
   }
-
 
   render() {
     return (

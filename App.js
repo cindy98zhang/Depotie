@@ -4,7 +4,11 @@ import { createStackNavigator } from 'react-navigation';
 import { LinearGradient} from 'expo';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
-
+import Main from './components/Main.js;'
+import Mine from './components/Mine.js';
+import CreateMyPost from './components/CreateMyPost.js'
+import NavBar from './components/NavBar.js';
+import Details from './components/Details.js';
 
 
 class App extends React.Component {
@@ -74,5 +78,8 @@ export default createStackNavigator({
   Home: {screen: App},
   Register: {screen: Register},
   Login: {screen: Login},
-
+  Main: {screen: Main},
+  CreateMyPost: {screen: CreateMyPost},
+  Mine: {screen: Mine},
+  Details: {screen: Details}
 }, {initialRouteName: "Home"});

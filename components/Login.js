@@ -1,6 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, TextInput, AsyncStorage } from 'react-native';
 
+url = "http://2f5caa14.ngrok.io"
+
 class Login extends React.Component {
   static navigationOptions = {
     title: 'Login'
@@ -14,23 +16,23 @@ class Login extends React.Component {
     }
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     AsyncStorage.getItem('user')
     .then(result => {
       var parsedResult = JSON.parse(result);
       var username = parsedResult.username;
       var password = parsedResult.password;
       if (username && password) {
+        this.setState({username: username, password: password});
         return this.login(username, password)
       }
-      // Don't really need an else clause, we don't do anything in this case.
     })
     .catch(err => {alert(err)})
   }
 
 
   login(username, password) {
-    fetch('http://4f6f3283.ngrok.io/login', {
+    fetch(url + '/login', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -45,7 +47,7 @@ class Login extends React.Component {
       console.log(json)
       if (json.success) {
         alert('Successfully Logged in!');
-        this.props.navigation.navigate('Main')
+        this.props.navigation.navigate('Main', {username: username});
       }
       else {
         alert('Login failed')
