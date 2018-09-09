@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 import Details from './Details.js'
 
-url = "http://1476ebd9.ngrok.io"
+url = "http://c16b4460.ngrok.io"
 
 class Main extends React.Component {
   static navigationOptions = {
@@ -58,14 +58,11 @@ class Main extends React.Component {
     this.props.navigation.navigate('Notifications', {username: this.state.username});
   }
 
-
-
   showDetail(post) {
     this.props.navigation.navigate('Details', {detailOfPost: post});
   }
 
   likes(index) {
-
     fetch(url+'/likes', {
       method: 'POST',
       headers: {
@@ -84,7 +81,6 @@ class Main extends React.Component {
             for (var j = 0; j < this.state.posts[i].likes.length; j++) {
               if (this.state.posts[i].likes[j] === this.state.username) return;
             }
-
             this.setState({
               posts: this.state.posts.map((post, ind) => (ind === i ? Object.assign({}, post, {likes: post.likes.concat([this.state.username])}) : post))
             })
@@ -112,7 +108,6 @@ class Main extends React.Component {
     .then((response) => response.json())
     .then((json) => {
       if (json.success) {
-
         this.setState({
           posts: this.state.posts.map((post) => (
             post._id === index ?
@@ -127,7 +122,6 @@ class Main extends React.Component {
           ))
         });
         this.setState({comment: ""});
-
       }
     })
     .catch((err) => {
@@ -136,76 +130,71 @@ class Main extends React.Component {
   }
 
   render() {
-
     return (
       <View style={styles.container}>
         <View >
           <NavBar
-            // currentPage={this.state.currentPage}
             goToNotifications={() => this.goToNotifications()}
             goToMine={() => this.goToMine()}
-          goToPost={() => this.goToPost()}
-          createMyPost={() => this.createMyPost()}/>
-        </View>
-        <View>
-          <FlatList
-            renderItem={(item) => {
-              const post = item.item;
-              return (
-                <View style={styles.container}>
-                  <Text style={{fontSize:5}}>{"\n"}</Text>
-                  <Text style={{color:"#E7792B",fontSize: 20,marginLeft: 20}}>User: {post.owner}</Text>
-                  <Text style={{color:"#E7792B",fontSize: 20,marginLeft: 20}}>{post.body.title}</Text>
-                  <Text style={{color:"#E7792B",fontSize: 20,marginLeft: 20}}>{post.body.introduction}</Text>
-                  <Text style={{fontSize:5}}>{"\n"}</Text>
-                  <View style={{alignItems: "center"}}><Image
-                    source={{uri: post.body.image}}
-                    style={styles.postImage}
-                  /></View>
-
-                  <Text style={{color:"#E7792B",fontSize: 12, marginTop:3}}>    Date Posted: {post.date}{"\n"}</Text>
-
-                  <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-
-                    <TouchableOpacity
-                      style={[styles.button]}
-                      onPress={(i) => this.likes(post._id)}>
-                      <Text style={{color:"#fff",fontSize: 18,fontWeight:'bold'}}>Likes: {post.likes.length}</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      style={[styles.button]}
-                      onPress={(i) => this.showDetail(post)}>
-                      <Text style={{color:"#fff",fontSize: 16,fontWeight:'bold'}}>Details</Text>
-                    </TouchableOpacity>
+            goToPost={() => this.goToPost()}
+            createMyPost={() => this.createMyPost()}/>
+          </View>
+          <View>
+            <FlatList
+              renderItem={(item) => {
+                const post = item.item;
+                return (
+                  <View style={styles.container}>
+                    <Text style={{fontSize:5}}>{"\n"}</Text>
+                    <Text style={{color:"#E7792B",fontSize: 22,marginLeft: 10, marginRight: 10}}>{post.owner}</Text>
+                    <Text style={{color:"#E7792B",fontSize: 24,fontWeight: 'bold',marginLeft: 10,marginRight: 10,textAlign: "center"}}>{post.body.title}</Text>
+                    <Text style={{color:"black",fontSize: 16,marginLeft: 10,marginRight: 10,textAlign: "justify"}}>{post.body.introduction}</Text>
+                    <Text style={{fontSize:5}}>{"\n"}</Text>
+                    <View style={{alignItems: "center"}}>
+                      <Image
+                        source={{uri: post.body.image}}
+                        style={styles.postImage}
+                      />
+                    </View>
+                    <Text style={{color:"#E7792B",fontSize: 12, marginTop:3}}>    Date Posted: {post.date}{"\n"}</Text>
+                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                      <TouchableOpacity
+                        style={[styles.button]}
+                        onPress={(i) => this.likes(post._id)}>
+                        <Text style={{color:"#fff",fontSize: 18,fontWeight:'bold'}}>Likes: {post.likes.length}</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[styles.button]}
+                        onPress={(i) => this.showDetail(post)}>
+                        <Text style={{color:"#fff",fontSize: 16,fontWeight:'bold'}}>Details</Text>
+                      </TouchableOpacity>
+                    </View>
+                    <View>
+                      <Text style={{color:"#E7792B",fontSize: 18,marginTop: 10,marginLeft: 20}}>Comments: </Text>
+                      {post.comments.map(p => {
+                        return <Text style={{color:"black",fontSize: 15, marginLeft:50,marginRight:20, borderRadius:10}}>{p.username}: {p.comment}</Text>
+                      })}
+                    </View>
+                    <Text style={{color:"#E7792B",fontSize: 15,marginTop: 4,marginLeft: 20}}>Add Reply: </Text>
+                    <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                      <TextInput
+                        style={styles.inputfield}
+                        placeholder='  Add a comment...'
+                        onChangeText={(comment) => this.setState({comment: comment})}
+                      />
+                      <TouchableOpacity
+                        style={[styles.buttonPost]}
+                        onPress={(i) => this.sendComment(post._id)}>
+                        <Text style={{color:"#fff",fontSize: 16}}>Post</Text>
+                      </TouchableOpacity>
+                    </View>
+                    <Text style={{fontSize:20}}>{"\n"}</Text>
                   </View>
-                  <View>
-
-                    <Text style={{color:"#E7792B",fontSize: 18,marginTop: 10,marginLeft: 20}}>Comments: </Text>
-                    {post.comments.map(p => {
-                      return <Text style={{color:"#E7792B",fontSize: 15, marginLeft:50,marginRight:20, borderRadius:10}}>{p.username}: {p.comment}</Text>
-                    })}
-                  </View>
-                  <Text style={{color:"#E7792B",fontSize: 15,marginTop: 4,marginLeft: 20}}>Add Reply: </Text>
-                  <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                  <TextInput
-                    style={styles.inputfield}
-                    placeholder='  Add a comment...'
-                    onChangeText={(comment) => this.setState({comment: comment})}
-                  />
-                  <TouchableOpacity
-                    style={[styles.buttonPost]}
-                    onPress={(i) => this.sendComment(post._id)}>
-                    <Text style={{color:"#fff",fontSize: 16}}>Post</Text>
-                  </TouchableOpacity>
-                  </View>
-                  <Text style={{fontSize:20}}>{"\n"}</Text>
-                </View>
-              )}}
+                )
+              }}
               data = {this.state.posts}
             />
           </View>
-
         </View>
       )
     }

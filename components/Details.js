@@ -3,7 +3,7 @@ import { FlatList, ScrollView,TouchableOpacity, StyleSheet, Text, View, TextInpu
 import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 
-url = "http://1476ebd9.ngrok.io"
+url = "http://c16b4460.ngrok.io"
 
 class Details extends React.Component {
   static navigationOptions = {
@@ -12,7 +12,6 @@ class Details extends React.Component {
 
   constructor() {
     super();
-    console.log("Deatils");
     this.state = {
       post: undefined
     }
@@ -20,7 +19,6 @@ class Details extends React.Component {
 
   componentDidMount() {
     var post = this.props.navigation.getParam('detailOfPost', {});
-    console.log(post);
     this.setState({post: post})
   }
 
@@ -32,33 +30,29 @@ class Details extends React.Component {
     }
     return (
       <View style={styles.container}>
-      <ScrollView>
-        <View style={{flex: 1,}}>
-          <View style={styles.container}>
-            <Text style={styles.major}>Author: {post.owner}</Text>
-            <Text style={styles.major}>Post date: {post.date}</Text>
-            <Text style={styles.major}>Title: {post.body.title}</Text>
-            <Text style={styles.major}>Style: {post.body.class}</Text>
-            <Text style={styles.major}>Description: {post.body.introduction}</Text>
-            <Image source={{uri: post.body.image}}
-              style={{marginLeft:30, width: 350, height: 350}}
-            />
-            <Text style={styles.major}>Likes: {post.likes.length}</Text>
-            <View>
-              <Text style={{color:'#fff',fontSize: 18,marginLeft:10,fontWeight:'bold'}}>Comments: </Text>
-              {post.comments.map(p => {
-                return <Text style={{color:'#fff',marginLeft:40,fontSize:14}}>{p.comment}</Text>
-              })}
-            </View>
-            <View>
-              <Text style={{color:'#fff',fontSize: 18,marginLeft:10,fontWeight:'bold'}}>All the things: </Text>
-              {post.detail.map(d => {
-                return <Text style={{color:'#fff',marginLeft:40,fontSize:14}}>{d.item} {d.num} {d.price}</Text>
-              })}
-            </View>
+        <ScrollView>
+          <Text style={styles.major, {marginRight: 10,marginLeft: 10, fontSize: 18, color: 'white'}}>Author: {post.owner}</Text>
+          <Text style={styles.major, {marginRight: 10,marginLeft: 10,fontSize: 12, color: 'white'}}>Post date: {post.date}</Text>
+          <Text style={styles.major, {marginRight: 10,marginLeft: 10,fontSize: 24, color: 'white',textAlign:"center"}}>Title: {post.body.title}</Text>
+          <Text style={styles.major, {marginRight: 10,marginLeft: 10,fontSize: 16, color: 'white', textAlign:"right"}}>Style: {post.class}</Text>
+          <Text style={styles.major, {marginRight: 10,marginLeft: 10,fontSize: 16, color: 'white',textAlign:"justify"}}>Description: {post.body.introduction}</Text>
+          <Image source={{uri: post.body.image}}
+            style={{marginLeft:30, width: 350, height: 350}}
+          />
+          <Text style={styles.major}>Likes: {post.likes.length}</Text>
+          <View>
+            <Text style={{color:'#fff',fontSize: 18,marginLeft:10,fontWeight:'bold'}}>Comments: </Text>
+            {post.comments.map(p => {
+              return <Text style={{color:'#fff',marginLeft:40,fontSize:14}}>{p.username}: {p.comment}</Text>
+            })}
           </View>
-        </View>
-      </ScrollView>
+          <View>
+            <Text style={{color:'#fff',fontSize: 18,marginLeft:10,fontWeight:'bold'}}>All the things: </Text>
+            {post.detail.map(d => {
+              return <Text style={{color:'#fff',marginLeft:40,fontSize:14}}>{d.item} {d.num} {d.price}</Text>
+            })}
+          </View>
+        </ScrollView>
       </View>
     )
   }

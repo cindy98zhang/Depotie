@@ -8,8 +8,6 @@ var upload = multer({ dest: 'uploads/' })
 var User = require('./Model.js').User;
 var Post = require('./Model.js').Post;
 
-
-// Express setup
 var app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -26,16 +24,16 @@ mongoose.connection.on('error', function(err) {
 
 app.post('/register', function(req, res) {
 
-      User.findOne({username: req.body.username}, function(err, user) {
-        if (err) res.json({'error': err});
-        else if (user) res.json({'error': 'username already existed'});
-        else {
-          new User(req.body)
-          .save()
-          .then(() => res.json({'success': true}))
-          .catch((err) => res.status(500).end(err.message))
-        }
-      })
+  User.findOne({username: req.body.username}, function(err, user) {
+    if (err) res.json({'error': err});
+    else if (user) res.json({'error': 'username already existed'});
+    else {
+      new User(req.body)
+      .save()
+      .then(() => res.json({'success': true}))
+      .catch((err) => res.status(500).end(err.message))
+    }
+  })
 
 })
 
@@ -81,7 +79,6 @@ app.post('/myposts', function(req, res) {
         }
       }
     }
-    console.log(posts, "MMMMMMMMMMMMMMMMMMMMMMMMMMM");
     res.json(Object.assign({}, {posts: posts}, {notify: notify}));
   })
 });
@@ -130,7 +127,6 @@ app.post('/sendcomment', function(req, res) {
 });
 
 app.post('/notifications', function(req, res) {
-  console.log(req.body.username);
   Post.find({owner: req.body.username}, function(err, post) {
     if (err) res.json({error: "comment post error"});
     let notification = [];
@@ -147,23 +143,9 @@ app.post('/notifications', function(req, res) {
         notificationComments.push({date: new Date(), title: post[i].body.title, username: post[i].comments[j].username, comment: post[i].comments[j].comment});
       }
     }
-
-    console.log(notification);
-    console.log("----------------------------")
-    console.log(notificationLikes)
-    console.log("-----------------------------")
-    console.log(notificationComments)
     res.json(Object.assign({}, {notifications: notification}, {notificationLikes: notificationLikes}, {notificationComments: notificationComments}));
   })
 });
-
-// app.post('/uploadimages', (req, res) => {
-//   console.log(req);
-//   console.log("-----------------------")
-//   console.log(req.body);
-//   res.json({success: true});
-// });
-
 
 app.listen(3000, function() {
   console.log("Server starting!")

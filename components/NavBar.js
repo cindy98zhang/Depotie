@@ -11,34 +11,34 @@ class NavBar extends React.Component {
   }
 
   render() {
-      return (
-        <View style={{backgroundColor:'#E7792B',marginTop:5,marginBottom: 10, width: "100%", height: 45, flexDirection: "row", justifyContent: "space-between"}}>
+    return (
+      <View style={{backgroundColor:'#E7792B',marginTop:5,marginBottom: 10, width: "100%", height: 45, flexDirection: "row", justifyContent: "space-between"}}>
 
-          <View style={styles.block}>
-            <TouchableOpacity onPress= {() => this.props.goToPost()}>
-              <Text style={styles.texxt}>Feeds</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.block}>
-            <TouchableOpacity onPress={() => this.props.goToMine()}>
-              <Text style={styles.texxt}>Me</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.block}>
-            <TouchableOpacity onPress={() => this.props.goToNotifications()}>
-              <Text style={styles.texxt}>News</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.block}>
-            <TouchableOpacity onPress={() => this.props.createMyPost()}>
-              <Text style={styles.texxt}>Post</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.block}>
+          <TouchableOpacity onPress= {() => this.props.goToPost()}>
+            <Text style={styles.texxt}>Feeds</Text>
+          </TouchableOpacity>
         </View>
-      )
+
+        <View style={styles.block}>
+          <TouchableOpacity onPress={() => this.props.goToMine()}>
+            <Text style={styles.texxt}>Me</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.block}>
+          <TouchableOpacity onPress={() => this.props.goToNotifications()}>
+            <Text style={styles.texxt}>News</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.block}>
+          <TouchableOpacity onPress={() => this.props.createMyPost()}>
+            <Text style={styles.texxt}>Post</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
   }
 }
 

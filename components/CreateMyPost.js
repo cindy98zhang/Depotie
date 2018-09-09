@@ -3,7 +3,7 @@ import { ScrollView,TouchableOpacity, StyleSheet, Text, View, TextInput, ListVie
 import { StackNavigator } from 'react-navigation';
 import { ImagePicker } from 'expo';
 
-url = "http://1476ebd9.ngrok.io"
+url = "http://c16b4460.ngrok.io"
 
 class CreateMyPost extends React.Component {
   static navigationOptions = {
@@ -66,7 +66,6 @@ class CreateMyPost extends React.Component {
     })
     .then((response) => response.json())
     .then((json) => {
-      console.log(json);
       if (json.success) {
         this.props.navigation.navigate('Main');
       }

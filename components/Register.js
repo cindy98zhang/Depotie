@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, TextInput } from 'react-native';
-url = "http://1476ebd9.ngrok.io"
+url = "http://c16b4460.ngrok.io"
 
 class Register extends React.Component {
   static navigationOptions = {
@@ -16,7 +16,6 @@ class Register extends React.Component {
   }
 
   register() {
-    console.log(this.state.username);
     fetch(url + '/register', {
       method: 'POST',
       headers: {
@@ -29,13 +28,9 @@ class Register extends React.Component {
     })
     .then((response) => response.json())
     .then((json) => {
-      console.log(json);
       if (json.success) alert('Successfully registered')
       else alert('Registration failed')
-
-      /* do something with responseJson and go back to the Login view but
-      * make sure to check for responseJson.success! */
-     this.props.navigation.navigate('Login');
+      this.props.navigation.navigate('Login');
     })
     .catch((err) => {
       console.log('error', err)
@@ -50,7 +45,7 @@ class Register extends React.Component {
           style={styles.inputfield}
           placeholder='  Username'
           onChangeText={(username) => this.setState({username: username})}
-          />
+        />
 
         <Text style={styles.label}>Password</Text>
         <TextInput

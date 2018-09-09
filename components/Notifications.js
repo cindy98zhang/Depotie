@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 import Details from './Details.js'
 
-url = "http://1476ebd9.ngrok.io"
+url = "http://c16b4460.ngrok.io"
 
 class Notifications extends React.Component {
   static navigationOptions = {
@@ -19,7 +19,6 @@ class Notifications extends React.Component {
       notificationLikes: null,
       notificationComments: null,
       username: "",
-      // currentPage: "Main"
     }
   }
 
@@ -37,7 +36,6 @@ class Notifications extends React.Component {
     })
     .then((response) => response.json())
     .then((json) => {
-      console.log(json);
       this.setState({
         notifications: json.notifications,
         notificationLikes: json.notificationLikes,
@@ -66,66 +64,63 @@ class Notifications extends React.Component {
   }
 
   render() {
-console.log(this.state)
     return (
       <View style={styles.container}>
         <ScrollView>
-        <View >
-          <NavBar
-            goToNotifications={() => this.goToNotifications()}
-            goToMine={() => this.goToMine()}
-            goToPost={() => this.goToPost()}
-            createMyPost={() => this.createMyPost()}/>
-          </View>
-          <View>
-            <Text style={styles.major}>System Reward Notifications</Text>
-            <FlatList
-              renderItem={(item) => {
-                const notification = item.item;
-                console.log(notification)
-                return (
-                  <View>
-                    <Text>{"\n"}</Text>
-                    <Text style={styles.major}>Nice Post! Your post {notification.title} got over 5 likes. Show this notification instore to get 10% off on your next purchase at Home Depot:)</Text>
-                  </View>
-                )
-              }}
-              data = {this.state.notifications}
-            />
-          </View>
-          <View>
+          <View >
+            <NavBar
+              goToNotifications={() => this.goToNotifications()}
+              goToMine={() => this.goToMine()}
+              goToPost={() => this.goToPost()}
+              createMyPost={() => this.createMyPost()}/>
+            </View>
+            <View>
+              <Text style={styles.major}>System Reward Notifications</Text>
+              <FlatList
+                renderItem={(item) => {
+                  const notification = item.item;
+                  return (
+                    <View>
+                      <Text>{"\n"}</Text>
+                      <Text style={styles.major}>Nice Post! Your post {notification.title} got over 5 likes. Show this notification instore to get 10% off on your next purchase at Home Depot:)</Text>
+                    </View>
+                  )
+                }}
+                data = {this.state.notifications}
+              />
+            </View>
+            <View>
 
-            <FlatList
-              renderItem={(item) => {
-                const notification = item.item;
-                console.log(notification)
-                return (
-                  <View>
-                    <Text>{"\n"}</Text>
-                    <Text style={styles.major}>Wow!{notification.username} like your post {notification.title}! Get more likes to get HomeDepot discount!</Text>
-                  </View>
-                )
-              }}
-              data = {this.state.notificationLikes}
-            />
-          </View>
-          <View>
+              <FlatList
+                renderItem={(item) => {
+                  const notification = item.item;
+                  return (
+                    <View>
+                      <Text>{"\n"}</Text>
+                      <Text style={styles.major}>Wow!{notification.username} like your post {notification.title}! Get more likes to get HomeDepot discount!</Text>
+                    </View>
+                  )
+                }}
+                data = {this.state.notificationLikes}
+              />
+            </View>
+            <View>
 
-            <FlatList
-              renderItem={(item) => {
-                const notification = item.item;
-                console.log(notification)
-                return (
-                  <View>
-                    <Text>{"\n"}</Text>
-                    <Text style={styles.major}>{notification.username} comments your post {notification.title}</Text>
-                  </View>
-                )
-              }}
-              data = {this.state.notificationComments}
-            />
-          </View>
-        </ScrollView>
+              <FlatList
+                renderItem={(item) => {
+                  const notification = item.item;
+                  return (
+                    <View>
+                      <Text>{"\n"}</Text>
+                      <Text style={styles.major}>{notification.username} comments your post {notification.title}:</Text>
+                      <Text style={styles.major}>" {notification.comment} "</Text>
+                    </View>
+                  )
+                }}
+                data = {this.state.notificationComments}
+              />
+            </View>
+          </ScrollView>
         </View>
       )
     }
@@ -144,7 +139,5 @@ console.log(this.state)
       marginLeft:10,
     }
   });
-
-
 
   export default Notifications;

@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import { ImagePicker } from 'expo';
 import NavBar from './NavBar.js';
 
-url = "http://1476ebd9.ngrok.io"
+url = "http://c16b4460.ngrok.io"
 
 class Mine extends React.Component {
   static navigationOptions = {
@@ -23,7 +23,6 @@ class Mine extends React.Component {
   async componentDidMount() {
     var username = this.props.navigation.getParam("username", "");
     await this.setState({username: username});
-    console.log(this.state.username);
     fetch(url+'/myposts', {
       method: 'POST',
       headers: {
@@ -35,7 +34,6 @@ class Mine extends React.Component {
     })
     .then((response) => response.json())
     .then((json) => {
-      console.log(json);
       if (json.posts.length >= 0) {
         this.setState({myposts: json.posts})
       }
@@ -74,7 +72,6 @@ class Mine extends React.Component {
   }
 
   likes(index) {
-
     fetch(url+'/likes', {
       method: 'POST',
       headers: {
@@ -93,7 +90,6 @@ class Mine extends React.Component {
             for (var j = 0; j < this.state.myposts[i].likes.length; j++) {
               if (this.state.myposts[i].likes[j] === this.state.username) return;
             }
-
             this.setState({
               myposts: this.state.myposts.map((post, ind) => (ind === i ? Object.assign({}, post, {likes: post.likes.concat([this.state.username])}) : post))
             })
@@ -121,7 +117,6 @@ class Mine extends React.Component {
     .then((response) => response.json())
     .then((json) => {
       if (json.success) {
-
         this.setState({
           myposts: this.state.myposts.map((post) => (
             post._id === index ?
@@ -136,7 +131,6 @@ class Mine extends React.Component {
           ))
         });
         this.setState({comment: ""});
-
       }
     })
     .catch((err) => {
@@ -147,13 +141,13 @@ class Mine extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View >
+        <View>
           <NavBar
-            // currentPage={this.state.currentPage}
             goToNotifications={() => this.goToNotifications()}
             goToMine={() => this.goToMine()}
-          goToPost={() => this.goToPost()}
-          createMyPost={() => this.createMyPost()}/>
+            goToPost={() => this.goToPost()}
+            createMyPost={() => this.createMyPost()}
+          />
         </View>
         <View>
           <FlatList
@@ -166,21 +160,19 @@ class Mine extends React.Component {
                   <Text style={{color:"#E7792B",fontSize: 20,marginLeft: 20}}>{post.body.title}</Text>
                   <Text style={{color:"#E7792B",fontSize: 20,marginLeft: 20}}>{post.body.introduction}</Text>
                   <Text style={{fontSize:5}}>{"\n"}</Text>
-                  <View style={{alignItems: "center"}}><Image
-                    source={{uri: post.body.image}}
-                    style={styles.postImage}
-                  /></View>
-
+                  <View style={{alignItems: "center"}}>
+                    <Image
+                      source={{uri: post.body.image}}
+                      style={styles.postImage}
+                    />
+                  </View>
                   <Text style={{color:"#E7792B",fontSize: 12, marginTop:3}}>    Date Posted: {post.date}{"\n"}</Text>
-
                   <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-
                     <TouchableOpacity
                       style={[styles.button]}
                       onPress={(i) => this.likes(post._id)}>
                       <Text style={{color:"#fff",fontSize: 18,fontWeight:'bold'}}>Likes: {post.likes.length}</Text>
                     </TouchableOpacity>
-
                     <TouchableOpacity
                       style={[styles.button]}
                       onPress={(i) => this.showDetail(post)}>
@@ -188,7 +180,6 @@ class Mine extends React.Component {
                     </TouchableOpacity>
                   </View>
                   <View>
-
                     <Text style={{color:"#E7792B",fontSize: 18,marginTop: 10,marginLeft: 20}}>Comments: </Text>
                     {post.comments.map(p => {
                       return <Text style={{color:"#E7792B",fontSize: 15, marginLeft:50,marginRight:20, borderRadius:10}}>{p.username}: {p.comment}</Text>
@@ -196,16 +187,16 @@ class Mine extends React.Component {
                   </View>
                   <Text style={{color:"#E7792B",fontSize: 15,marginTop: 4,marginLeft: 20}}>Add Reply: </Text>
                   <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-                  <TextInput
-                    style={styles.inputfield}
-                    placeholder='  Add a comment...'
-                    onChangeText={(comment) => this.setState({comment: comment})}
-                  />
-                  <TouchableOpacity
-                    style={[styles.buttonPost]}
-                    onPress={(i) => this.sendComment(post._id)}>
-                    <Text style={{color:"#fff",fontSize: 16}}>Post</Text>
-                  </TouchableOpacity>
+                    <TextInput
+                      style={styles.inputfield}
+                      placeholder='  Add a comment...'
+                      onChangeText={(comment) => this.setState({comment: comment})}
+                    />
+                    <TouchableOpacity
+                      style={[styles.buttonPost]}
+                      onPress={(i) => this.sendComment(post._id)}>
+                      <Text style={{color:"#fff",fontSize: 16}}>Post</Text>
+                    </TouchableOpacity>
                   </View>
                   <Text style={{fontSize:20}}>{"\n"}</Text>
                 </View>
@@ -213,59 +204,57 @@ class Mine extends React.Component {
               data = {this.state.myposts}
             />
           </View>
-
         </View>
-    )
+      )
+    }
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex:1,
-    backgroundColor:'#fff'
-  },
-  main: {
-    flex: 1
-  },
-  postImage:{
-    width: 350,
-    height: 350,
-  },
-  postInfo:{
-    color:"#E7792B",
-    fontSize: 23,
-  },
-  inputfield:{
-    marginLeft:20,
-    margin: 3,
-    width: 300,
-    height: 40,
-    borderRadius: 10,
-    backgroundColor:'#E7792B',
-  },
-  date:{
-    color:"#E7792B",
-    fontSize: 10,
-  },
-  button: {
-    marginLeft:20,
-    marginRight:20,
-    alignItems: 'center',
-    justifyContent:'center',
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: '#E7792B',
-    width: 100
-  },
-  buttonPost: {
-    marginRight:20,
-    alignItems: 'center',
-    justifyContent:'center',
-    borderRadius: 10,
-    backgroundColor: '#E7792B',
-    width: 70
-  },
-});
+  const styles = StyleSheet.create({
+    container: {
+      flex:1,
+      backgroundColor:'#fff'
+    },
+    main: {
+      flex: 1
+    },
+    postImage:{
+      width: 350,
+      height: 350,
+    },
+    postInfo:{
+      color:"#E7792B",
+      fontSize: 23,
+    },
+    inputfield:{
+      marginLeft:20,
+      margin: 3,
+      width: 300,
+      height: 40,
+      borderRadius: 10,
+      backgroundColor:'#E7792B',
+    },
+    date:{
+      color:"#E7792B",
+      fontSize: 10,
+    },
+    button: {
+      marginLeft:20,
+      marginRight:20,
+      alignItems: 'center',
+      justifyContent:'center',
+      padding: 10,
+      borderRadius: 10,
+      backgroundColor: '#E7792B',
+      width: 100
+    },
+    buttonPost: {
+      marginRight:20,
+      alignItems: 'center',
+      justifyContent:'center',
+      borderRadius: 10,
+      backgroundColor: '#E7792B',
+      width: 70
+    },
+  });
 
-
-export default Mine;
+  export default Mine;
