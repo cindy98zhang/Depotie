@@ -3,7 +3,7 @@ import { ScrollView,TouchableOpacity, StyleSheet, Text, View, TextInput, ListVie
 import { StackNavigator } from 'react-navigation';
 import { ImagePicker } from 'expo';
 
-url = "http://929f8ad5.ngrok.io"
+url = "http://413ac210.ngrok.io"
 
 class CreateMyPost extends React.Component {
   static navigationOptions = {

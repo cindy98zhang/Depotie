@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import { ImagePicker } from 'expo';
 import NavBar from './NavBar.js';
 
-url = "http://929f8ad5.ngrok.io"
+url = "http://413ac210.ngrok.io"
 
 class Mine extends React.Component {
   static navigationOptions = {

@@ -28,7 +28,13 @@ class NavBar extends React.Component {
 
           <View style={styles.block}>
             <TouchableOpacity onPress={() => this.props.goToNotifications()}>
-              <Text style={styles.texxt}>Notification</Text>
+              <Text style={styles.texxt}>News</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.block}>
+            <TouchableOpacity onPress={() => this.props.goToNotifications()}>
+              <Text style={styles.texxt}>Post</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -39,11 +45,11 @@ class NavBar extends React.Component {
 const styles = StyleSheet.create({
   block:{
     marginTop:5,
-    marginLeft:10,
-    marginRight:10,
+    marginLeft:7,
+    marginRight:7,
     marginBottom:5,
     height: 40,
-    width:110,
+    width:87,
     backgroundColor: '#fff',
     padding: 5,
     borderRadius: 10,

@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 import Details from './Details.js'
 
-url = "http://929f8ad5.ngrok.io"
+url = "http://413ac210.ngrok.io"
 
 class Main extends React.Component {
   static navigationOptions = {

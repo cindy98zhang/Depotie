@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 import Details from './Details.js'
 
-url = "http://929f8ad5.ngrok.io"
+url = "http://413ac210.ngrok.io"
 
 class Notifications extends React.Component {
   static navigationOptions = {
@@ -72,46 +72,54 @@ console.log(this.state)
         <ScrollView>
         <View >
           <NavBar
-            // currentPage={this.state.currentPage}
             goToNotifications={() => this.goToNotifications()}
             goToMine={() => this.goToMine()}
             goToPost={() => this.goToPost()}
             createMyPost={() => this.createMyPost()}/>
           </View>
           <View>
-            <Text>怎么写</Text>
+            <Text style={styles.major}>System Reward Notifications</Text>
             <FlatList
               renderItem={(item) => {
                 const notification = item.item;
                 console.log(notification)
                 return (
-                  <View><Text>Your post {notification.title} got over 5 likes</Text></View>
+                  <View>
+                    <Text>{"\n"}</Text>
+                    <Text style={styles.major}>Nice Post! Your post {notification.title} got over 5 likes. Show this notification instore to get 10% off on your next purchase at Home Depot:)</Text>
+                  </View>
                 )
               }}
               data = {this.state.notifications}
             />
           </View>
           <View>
-            <Text>不会写</Text>
+
             <FlatList
               renderItem={(item) => {
                 const notification = item.item;
                 console.log(notification)
                 return (
-                  <View><Text>{notification.username} likes your post {notification.title}</Text></View>
+                  <View>
+                    <Text>{"\n"}</Text>
+                    <Text style={styles.major}>Wow!{notification.username} users like your post {notification.title}! Get more likes to get HomeDepot discount!</Text>
+                  </View>
                 )
               }}
               data = {this.state.notificationLikes}
             />
           </View>
           <View>
-            <Text>你来写</Text>
+
             <FlatList
               renderItem={(item) => {
                 const notification = item.item;
                 console.log(notification)
                 return (
-                  <View><Text>{notification.username} comments your post {notification.title}</Text></View>
+                  <View>
+                    <Text>{"\n"}</Text>
+                    <Text style={styles.major}>{notification.username} comments your post {notification.title}</Text>
+                  </View>
                 )
               }}
               data = {this.state.notificationComments}
@@ -124,52 +132,19 @@ console.log(this.state)
   }
 
   const styles = StyleSheet.create({
-    container: {
+    container:{
       flex:1,
-      backgroundColor:'#fff'
-    },
-    main: {
-      flex: 1
-    },
-    postImage:{
-      width: 350,
-      height: 350,
-    },
-    postInfo:{
-      color:"#E7792B",
-      fontSize: 23,
-    },
-    inputfield:{
-      marginLeft:20,
-      margin: 3,
-      width: 300,
-      height: 40,
-      borderRadius: 10,
       backgroundColor:'#E7792B',
-    },
-    date:{
-      color:"#E7792B",
-      fontSize: 10,
-    },
-    button: {
-      marginLeft:20,
-      marginRight:20,
-      alignItems: 'center',
       justifyContent:'center',
-      padding: 10,
-      borderRadius: 10,
-      backgroundColor: '#E7792B',
-      width: 100
+      alignItems:'flex-start'
     },
-    buttonPost: {
-      marginRight:20,
-      alignItems: 'center',
-      justifyContent:'center',
-      borderRadius: 10,
-      backgroundColor: '#E7792B',
-      width: 70
-    },
+    major:{
+      color:'#fff',
+      fontSize: 18,
+      marginLeft:10,
+    }
   });
+
 
 
   export default Notifications;

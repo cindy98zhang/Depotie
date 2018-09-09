@@ -3,7 +3,7 @@ import { FlatList, ScrollView,TouchableOpacity, StyleSheet, Text, View, TextInpu
 import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 
-url = "http://929f8ad5.ngrok.io"
+url = "http://413ac210.ngrok.io"
 
 class Details extends React.Component {
   static navigationOptions = {
@@ -12,7 +12,7 @@ class Details extends React.Component {
 
   constructor() {
     super();
-    console.log("Deatilsssssssssssssssss");
+    console.log("Deatils");
     this.state = {
       post: undefined
     }
@@ -31,33 +31,29 @@ class Details extends React.Component {
       return <View><Text>hello</Text></View>
     }
     return (
-      <View style={{
-        flex: 1,
-      }}>
+      <View style={styles.container}>
       <ScrollView>
-        <View style={{
-          flex: 1,
-        }}>
+        <View style={{flex: 1,}}>
           <View style={styles.container}>
-            <Text>{post.owner}</Text>
-            <Text>{post.date}</Text>
-            <Text>{post.body.title}</Text>
-            <Text>{post.body.class}</Text>
-            <Text>{post.body.introduction}</Text>
+            <Text style={styles.major}>Author: {post.owner}</Text>
+            <Text style={styles.major}>Post date: {post.date}</Text>
+            <Text style={styles.major}>Title: {post.body.title}</Text>
+            <Text style={styles.major}>Style: {post.body.class}</Text>
+            <Text style={styles.major}>Description: {post.body.introduction}</Text>
             <Image source={{uri: post.body.image}}
-              style={{width: 100, height: 100}}
+              style={{marginLeft:30, width: 350, height: 350}}
             />
-            <Text>Likes: {post.likes.length}</Text>
+            <Text style={styles.major}>Likes: {post.likes.length}</Text>
             <View>
-              <Text>Comments: </Text>
+              <Text style={{color:'#fff',fontSize: 18,marginLeft:10,fontWeight:'bold'}}>Comments: </Text>
               {post.comments.map(p => {
-                return <Text>{p.comment}</Text>
+                return <Text style={{color:'#fff',marginLeft:40,fontSize:14}}>{p.comment}</Text>
               })}
             </View>
             <View>
-              <Text>All the things: </Text>
+              <Text style={{color:'#fff',fontSize: 18,marginLeft:10,fontWeight:'bold'}}>All the things: </Text>
               {post.detail.map(d => {
-                return <Text>{d.item} {d.num} {d.price}</Text>
+                return <Text style={{color:'#fff',marginLeft:40,fontSize:14}}>{d.item} {d.num} {d.price}</Text>
               })}
             </View>
           </View>
@@ -69,13 +65,16 @@ class Details extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    // paddingTop: 50,
+  container:{
+    flex:1,
+    backgroundColor:'#E7792B',
+    justifyContent:'center',
+    alignItems:'flex-start'
   },
-  main: {
-    flex: 1
+  major:{
+    color:'#fff',
+    fontSize: 18,
+    marginLeft:10,
   }
 });
 
