@@ -1,9 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text, View, TextInput, ListView, AsyncStorage, Image } from 'react-native';
+import { ScrollView,TouchableOpacity, StyleSheet, Text, View, TextInput, ListView, AsyncStorage, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { ImagePicker } from 'expo';
 
-url = "http://2f5caa14.ngrok.io"
+url = "http://929f8ad5.ngrok.io"
 
 class CreateMyPost extends React.Component {
   static navigationOptions = {
@@ -22,7 +22,6 @@ class CreateMyPost extends React.Component {
       price: "",
       things: [],
       class: "",
-      // currentPage: "CreateMyPost"
     }
   }
   componentDidMount() {
@@ -34,18 +33,6 @@ class CreateMyPost extends React.Component {
     })
     .catch(err => {alert(err)})
   }
-
-  // pickImage() {
-  //   const result = await ImagePicker.launchImageLibraryAsync({
-  //     allowsEditing: true,
-  //     base64: true,
-  //   });
-  //   if (!result.cancelled) {
-  //     this.setState({
-  //       image: result.uri,
-  //     });
-  //   }
-  // };
 
   addDetail() {
     this.setState({
@@ -61,30 +48,8 @@ class CreateMyPost extends React.Component {
       price: ""
     });
   }
-  //    imageToBase64(img)
-  // {
-  //     var canvas, ctx, dataURL, base64;
-  //     canvas = document.createElement("canvas");
-  //     ctx = canvas.getContext("2d");
-  //     canvas.width = img.width;
-  //     canvas.height = img.height;
-  //     ctx.drawImage(img, 0, 0);
-  //     dataURL = canvas.toDataURL("image/png");
-  //     base64 = dataURL.replace(/^data:image\/png;base64,/, "");
-  //     return base64;
-  // }
 
   post() {
-    // let upload = false;
-    // const uri = this.state.image;
-    // const uriParts = uri.split('.');
-    // const fileType = uriParts[uriParts.length - 1];
-    // const formData = new FormData();
-    // formData.append('photo', {
-    //   uri: uri,
-    //   name: `photo.${fileType}`,
-    //   type: `image/${fileType}`,
-    // });
     fetch(url + '/createmypost', {
       method: 'POST',
       headers: {
@@ -109,21 +74,6 @@ class CreateMyPost extends React.Component {
     .catch((err) => {
       console.log('error', err)
     });
-    // if (upload) {
-    //   fetch(url + '/uploadimages', {
-    //     method: "POST",
-    //     body: formData
-    //   })
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     if (json.success) {
-    //       this.props.navigation.navigate('Main');
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log('error', err)
-    //   });
-    // }
   }
 
   render() {
@@ -132,6 +82,7 @@ class CreateMyPost extends React.Component {
     });
     return (
       <View style={styles.container}>
+        <ScrollView>
         <View style={styles.flexstyle}>
           <Text style={styles.info}>Title</Text>
           <TextInput
@@ -164,10 +115,6 @@ class CreateMyPost extends React.Component {
               value = {this.state.image}
             />
           </View>
-
-          {/* <TouchableOpacity onPress={() => this.pickImage()}>
-          <Text>Upload picture</Text>
-        </TouchableOpacity> */}
         <ListView
           renderRow={(detail) => (
             <View>
@@ -217,6 +164,7 @@ class CreateMyPost extends React.Component {
             <Text>Submit</Text>
           </TouchableOpacity>
         </View>
+      </ScrollView>
       </View>
     )
   }

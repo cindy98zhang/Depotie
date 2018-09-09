@@ -1,9 +1,9 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, StyleSheet, Text, View, TextInput, ListView, Image, AsyncStorage } from 'react-native';
+import { FlatList, ScrollView,TouchableOpacity, StyleSheet, Text, View, TextInput, ListView, Image, AsyncStorage } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 
-url = "http://2f5caa14.ngrok.io"
+url = "http://929f8ad5.ngrok.io"
 
 class Details extends React.Component {
   static navigationOptions = {
@@ -26,8 +26,6 @@ class Details extends React.Component {
 
 
   render() {
-    // const post = this.props.navigation.getParam('detailOfPost', {}); //this.state.post;
-    // console.log(post.owner);
     const post = this.state.post;
     if (!post) {
       return <View><Text>hello</Text></View>
@@ -36,6 +34,7 @@ class Details extends React.Component {
       <View style={{
         flex: 1,
       }}>
+      <ScrollView>
         <View style={{
           flex: 1,
         }}>
@@ -63,6 +62,7 @@ class Details extends React.Component {
             </View>
           </View>
         </View>
+      </ScrollView>
       </View>
     )
   }

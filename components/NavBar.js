@@ -6,13 +6,11 @@ import Mine from './Mine.js';
 import CreateMyPost from './CreateMyPost.js'
 
 class NavBar extends React.Component {
-
   constructor() {
     super()
   }
 
   render() {
-
       return (
         <View style={{backgroundColor:'#E7792B',marginTop:5,marginBottom: 10, width: "100%", height: 45, flexDirection: "row", justifyContent: "space-between"}}>
 
@@ -23,22 +21,18 @@ class NavBar extends React.Component {
           </View>
 
           <View style={styles.block}>
-            <TouchableOpacity onPress = {() => this.props.createMyPost()}>
-              <Text style={styles.texxt}>Post mine</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.block}>
             <TouchableOpacity onPress={() => this.props.goToMine()}>
               <Text style={styles.texxt}>Me</Text>
             </TouchableOpacity>
           </View>
 
-
+          <View style={styles.block}>
+            <TouchableOpacity onPress={() => this.props.goToNotifications()}>
+              <Text style={styles.texxt}>Notification</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )
-
-
   }
 }
 
@@ -62,8 +56,5 @@ const styles = StyleSheet.create({
     fontWeight:'bold'
   }
 });
-
-
-
 
 export default NavBar;

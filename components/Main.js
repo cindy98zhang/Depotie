@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 import Details from './Details.js'
 
-url = "http://2f5caa14.ngrok.io"
+url = "http://929f8ad5.ngrok.io"
 
 class Main extends React.Component {
   static navigationOptions = {
@@ -23,15 +23,6 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    // AsyncStorage.getItem('user')
-    // .then(result => {
-    //   var parsedResult = JSON.parse(result);
-    //   var username = parsedResult.username;
-    //   console.log(username);
-    //   this.setState({username: username})
-    // })
-    // .catch(err => {alert(err)})
-
     let username = this.props.navigation.getParam('username', "no-name");
     this.setState({username: username})
     fetch(url+'/posts', {
@@ -61,6 +52,10 @@ class Main extends React.Component {
 
   goToMine() {
     this.props.navigation.navigate('Mine', {username: this.state.username});
+  }
+
+  goToNotifications() {
+    this.props.navigation.navigate('Notifications', {username: this.state.username});
   }
 
 
@@ -147,6 +142,7 @@ class Main extends React.Component {
         <View >
           <NavBar
             // currentPage={this.state.currentPage}
+            goToNotifications={() => this.goToNotifications()}
             goToMine={() => this.goToMine()}
           goToPost={() => this.goToPost()}
           createMyPost={() => this.createMyPost()}/>

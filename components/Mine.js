@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import { ImagePicker } from 'expo';
 import NavBar from './NavBar.js';
 
-url = "http://2f5caa14.ngrok.io"
+url = "http://929f8ad5.ngrok.io"
 
 class Mine extends React.Component {
   static navigationOptions = {
@@ -67,6 +67,10 @@ class Mine extends React.Component {
 
   showDetail(post) {
     this.props.navigation.navigate('Details', {detailOfPost: post});
+  }
+
+  goToNotifications() {
+    this.props.navigation.navigate('Notifications', {username: this.state.username});
   }
 
   likes(index) {
@@ -146,6 +150,7 @@ class Mine extends React.Component {
         <View >
           <NavBar
             // currentPage={this.state.currentPage}
+            goToNotifications={() => this.goToNotifications()}
             goToMine={() => this.goToMine()}
           goToPost={() => this.goToPost()}
           createMyPost={() => this.createMyPost()}/>

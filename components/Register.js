@@ -97,13 +97,11 @@ const styles = StyleSheet.create({
   },
   label:{
     color:"#fff",
-    fontFamily: 'Cochin',
     fontSize: 23,
   },
   buttonLabel: {
     color:"#E7792B",
     textAlign: 'center',
-    fontFamily: 'Cochin',
     fontSize: 23,
   }
 });

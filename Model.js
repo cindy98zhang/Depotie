@@ -42,6 +42,14 @@ var postSchema = new mongoose.Schema({
   likes: {
     type: Array,
     required: true
+  },
+  class: {
+    type: String,
+    required: true
+  },
+  notified: {
+    type: Boolean,
+    default: false
   }
 });
 

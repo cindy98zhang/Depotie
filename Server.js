@@ -129,6 +129,34 @@ app.post('/sendcomment', function(req, res) {
   })
 });
 
+app.post('/notifications', function(req, res) {
+  console.log(req.body.username);
+  Post.find({owner: req.body.username}, function(err, post) {
+    if (err) res.json({error: "comment post error"});
+    let notification = [];
+    let notificationLikes = [];
+    let notificationComments = [];
+    for (var i = 0; i < post.length; i++) {
+      for (var j = 0; j < post[i].likes.length; j++) {
+        notificationLikes.push({date: new Date(), title: post[i].body.title, username: post[i].likes[j]})
+      }
+      if (post[i].likes.length >= 5) {
+        notification.push({title: post[i].body.title, date: new Date()});
+      }
+      for (var j = 0; j < post[i].comments.length; j++) {
+        notificationComments.push({date: new Date(), title: post[i].body.title, username: post[i].comments[j].username, comment: post[i].comments[j].comment});
+      }
+    }
+
+    console.log(notification);
+    console.log("----------------------------")
+    console.log(notificationLikes)
+    console.log("-----------------------------")
+    console.log(notificationComments)
+    res.json(Object.assign({}, {notifications: notification}, {notificationLikes: notificationLikes}, {notificationComments: notificationComments}));
+  })
+});
+
 // app.post('/uploadimages', (req, res) => {
 //   console.log(req);
 //   console.log("-----------------------")

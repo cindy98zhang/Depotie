@@ -1,18 +1,16 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, Image} from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import { LinearGradient} from 'expo';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
-import Main from './components/Main.js;'
+import Main from './components/Main.js';
 import Mine from './components/Mine.js';
 import CreateMyPost from './components/CreateMyPost.js'
 import NavBar from './components/NavBar.js';
 import Details from './components/Details.js';
-
+import Notifications from './components/Notifications.js';
 
 class App extends React.Component {
-
   static navigationOptions = (props) => {
     title: "Home Page"
   }
@@ -22,15 +20,12 @@ class App extends React.Component {
       <View style={styles.container}>
           <Image style={{width: 150, height: 150}} source={require('./assets/icon.png')}/>
           <Text style={styles.title}>Depotie</Text>
-
           <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")} style={styles.button}>
             <Text style={styles.buttonLabel}>Login</Text>
           </TouchableOpacity>
-
           <TouchableOpacity onPress={() => this.props.navigation.navigate("Register")} style={styles.button}>
             <Text style={styles.buttonLabel}>Register</Text>
           </TouchableOpacity>
-
       </View>
     );
   }
@@ -58,7 +53,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color:"#fff",
-    fontFamily: 'Cochin',
     fontSize: 60,
     margin:30,
     paddingBottom: '15%',
@@ -68,11 +62,9 @@ const styles = StyleSheet.create({
   buttonLabel: {
     color:"#E7792B",
     textAlign: 'center',
-    fontFamily: 'Cochin',
     fontSize: 23,
   }
 });
-
 
 export default createStackNavigator({
   Home: {screen: App},
@@ -81,5 +73,6 @@ export default createStackNavigator({
   Main: {screen: Main},
   CreateMyPost: {screen: CreateMyPost},
   Mine: {screen: Mine},
-  Details: {screen: Details}
+  Details: {screen: Details},
+  Notifications: {screen: Notifications}
 }, {initialRouteName: "Home"});

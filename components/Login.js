@@ -30,7 +30,6 @@ class Login extends React.Component {
     .catch(err => {alert(err)})
   }
 
-
   login(username, password) {
     fetch(url + '/login', {
       method: 'POST',
@@ -122,13 +121,11 @@ const styles = StyleSheet.create({
   },
   label:{
     color:"#fff",
-    fontFamily: 'Cochin',
     fontSize: 23,
   },
   buttonLabel: {
     color:"#E7792B",
     textAlign: 'center',
-    fontFamily: 'Cochin',
     fontSize: 23,
   }
 });
