@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, TextInput, AsyncStorage } from 'react-native';
 
-url = "http://2f5caa14.ngrok.io"
+url = "http://1476ebd9.ngrok.io"
 
 class Login extends React.Component {
   static navigationOptions = {
@@ -45,7 +45,6 @@ class Login extends React.Component {
     .then((json) => {
       console.log(json)
       if (json.success) {
-        alert('Successfully Logged in!');
         this.props.navigation.navigate('Main', {username: username});
       }
       else {

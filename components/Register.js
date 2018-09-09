@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, TextInput } from 'react-native';
-url = "http://2f5caa14.ngrok.io"
+url = "http://1476ebd9.ngrok.io"
 
 class Register extends React.Component {
   static navigationOptions = {

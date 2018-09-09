@@ -3,7 +3,7 @@ import { FlatList, ScrollView,TouchableOpacity, StyleSheet, Text, View, TextInpu
 import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 
-url = "http://413ac210.ngrok.io"
+url = "http://1476ebd9.ngrok.io"
 
 class Details extends React.Component {
   static navigationOptions = {

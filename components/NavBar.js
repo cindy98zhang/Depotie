@@ -33,7 +33,7 @@ class NavBar extends React.Component {
           </View>
 
           <View style={styles.block}>
-            <TouchableOpacity onPress={() => this.props.goToNotifications()}>
+            <TouchableOpacity onPress={() => this.props.createMyPost()}>
               <Text style={styles.texxt}>Post</Text>
             </TouchableOpacity>
           </View>

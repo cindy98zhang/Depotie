@@ -81,7 +81,7 @@ app.post('/myposts', function(req, res) {
         }
       }
     }
-    console.log(posts);
+    console.log(posts, "MMMMMMMMMMMMMMMMMMMMMMMMMMM");
     res.json(Object.assign({}, {posts: posts}, {notify: notify}));
   })
 });

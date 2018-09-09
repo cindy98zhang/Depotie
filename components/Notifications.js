@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import NavBar from './NavBar.js';
 import Details from './Details.js'
 
-url = "http://413ac210.ngrok.io"
+url = "http://1476ebd9.ngrok.io"
 
 class Notifications extends React.Component {
   static navigationOptions = {
@@ -102,7 +102,7 @@ console.log(this.state)
                 return (
                   <View>
                     <Text>{"\n"}</Text>
-                    <Text style={styles.major}>Wow!{notification.username} users like your post {notification.title}! Get more likes to get HomeDepot discount!</Text>
+                    <Text style={styles.major}>Wow!{notification.username} like your post {notification.title}! Get more likes to get HomeDepot discount!</Text>
                   </View>
                 )
               }}
